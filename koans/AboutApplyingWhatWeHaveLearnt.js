@@ -41,36 +41,14 @@ describe("About Applying What We Have Learnt", function() {
       var noDamnMushrooms;
       var hasPizza;
 
-      var noMushroomsPlz = function(productList){
-        for (var j = 0; j<productList.length; j++){
-          for (var k = 0; k < productList[j].ingredients.length; k++){
-            if (products[j].ingredients[k] !== "mushrooms"){
-              noDamnMushrooms = true;
-            }
+      var findMePizza = products.filter(function(x){
+        if (x.name.includes("Pizza")) {
+          if (x.ingredients.includes("mushrooms") === false){
+            productsICanEat.push(x);
+            return productsICanEat;
           }
         }
-      }
-
-      products.filter ( noMushroomsPlz => {
-          if (noDamnMushrooms === true){
-            productsICanEat.push(products[i]);
-            console.log(productsICanEat);
-          }
-        });
-
-      /* solve using filter() & all() / any() */
-      var findMePizza = function(productList){
-        for (var i = 0; i<productList.length; i++){
-          if (productList[i].name.includes("Pizza")){
-            productsICanEat.push(productList[i]);
-            console.log(productsICanEat);
-          }
-        }
-      }
-
-      findMePizza(products);
-
-
+      });
 
       expect(productsICanEat.length).toBe(1);
   });
@@ -131,7 +109,7 @@ describe("About Applying What We Have Learnt", function() {
       .map(function(product) { return product.ingredients; })
       .flatten()
       .reduce(function(array, ingredient) {
-        array[ingredient] = (array[ingredient] || 0) + 1;
+        if (array[ingredient] = (array[ingredient] || 0) + 1);
         return array;
       }, ingredientCount)
       .value();
